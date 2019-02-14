@@ -12,9 +12,10 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
  
-require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-    console.log('addr: '+add);
-  })
+
+ http.listen(PORT, function(){
+    console.log('listening on *:'+PORT);
+});
 var DEFAULT_SPEED = 0.01;
 var MAX_COIN = 25;
 var CURRENT_COIN = 0;
@@ -191,9 +192,7 @@ io.on('connection', function(socket){
    
 });
  
-http.listen(PORT, function(){
-  console.log('listening on *:3000');
-});
+
 function InitCoin()
 {
     for (var i = 0; i < MAX_COIN; i++) {
