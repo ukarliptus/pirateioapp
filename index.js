@@ -1,21 +1,26 @@
 var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http,{
-  transports: ['websocket']
-});
+var http = require('http');
+var server = http.createServer(app).listen(process.env.PORT || '8080', function () {
+    console.log('App listening on port %s', server.address().port);
+    console.log('Press Ctrl+C to quit.');
+  });
+var app_pirateio = require('express')();
+var server1 = require('http').Server(app_pirateio);
+var io = require('socket.io')(server1,{transports: ['websocket']});
+
 var uuid = require('uuid4');
-
 var PORT = process.env.PORT || 3000;
- 
-app.get('/', function(req, res){
-  console.log('app get');
-  res.sendFile(__dirname + '/index.html');
-});
- 
 
- http.listen(PORT, function(){
+app.get('/', function(req, res){
+ 
+    res.send('GameTime:'+GAME_TIME);
+  });
+   
+
+http.listen(PORT, function(){
     console.log('listening on *:'+PORT);
-});
+  });
+server1.listen(65080);
 var DEFAULT_SPEED = 0.01;
 var MAX_COIN = 25;
 var CURRENT_COIN = 0;
