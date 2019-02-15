@@ -9,18 +9,16 @@ var server1 = require('http').Server(app_pirateio);
 var io = require('socket.io')(server1,{transports: ['websocket']});
 
 var uuid = require('uuid4');
-var PORT = process.env.PORT || 3000;
-
 app.get('/', function(req, res){
  
     res.send('GameTime:'+GAME_TIME);
   });
    
 
-http.listen(PORT, function(){
-    console.log('listening on *:'+PORT);
-  });
+
 server1.listen(65080);
+
+
 var DEFAULT_SPEED = 0.01;
 var MAX_COIN = 25;
 var CURRENT_COIN = 0;
